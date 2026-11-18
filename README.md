@@ -42,6 +42,10 @@ Garry's Mod always shows its own loading page to whoever hosts the game, so the 
 
 Build the Workshop package with `gmad.exe create -folder addon/map_singularity -out map_singularity.gma` (from `GarrysMod/bin`).
 
+## License
+
+[MIT](LICENSE). Workshop maps the roulette downloads belong to their authors.
+
 ---
 
 ## Українська

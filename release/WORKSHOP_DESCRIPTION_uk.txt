@@ -28,7 +28,17 @@ ms_status — стан у консоль
 ms_give_gun — видати КПП «Лунь»[/code]
 
 [h3]Екран завантаження для хоста (за бажанням)[/h3]
-Тому, хто сам запускає гру, Garry's Mod завжди показує свою сторінку завантаження, тож тунель порталу бачать лише ті, хто до вас підключається. Щоб бачити його самому, завантажте [url=https://github.com/Prostochell-544/MapSingularity/releases/latest/download/MapSingularity_HostLoadingScreen.zip]MapSingularity_HostLoadingScreen.zip[/url], розпакуйте й двічі клацніть [b]install.bat[/b], потім перезапустіть гру. Папку гри він знайде сам; [b]uninstall.bat[/b] усе поверне. Після оновлення GMod просто запустіть install.bat ще раз.
+Тому, хто сам запускає гру (одиночна гра або хост listen-сервера), Garry's Mod завжди показує свою сторінку завантаження, тож тунель порталу бачать лише ті, хто до вас підключається. Щоб бачити його самому:
+[olist]
+[*]Завантажте [url=https://github.com/Prostochell-544/MapSingularity/releases/latest/download/MapSingularity_HostLoadingScreen.zip]MapSingularity_HostLoadingScreen.zip[/url].
+[*]Розпакуйте будь-куди.
+[*]Двічі клацніть [b]install.bat[/b]. Папку гри він знайде сам; якщо гра в Program Files, Windows попросить права адміністратора.
+[*]Перезапустіть Garry's Mod.
+[/olist]
+Тунель з'являється лише під час стрибка через портал — звичайні завантаження карт не змінюються. [b]uninstall.bat[/b] поверне файл гри, [b]status.bat[/b] покаже, чи встановлено. Після оновлення GMod або «Перевірити цілісність файлів гри» просто запустіть install.bat ще раз.
+
+[h3]Вихідний код[/h3]
+[url=https://github.com/Prostochell-544/MapSingularity]GitHub — Prostochell-544/MapSingularity[/url] (ліцензія MIT): аддон, інструменти збирання моделі та інсталятор.
 
 [h3]Примітки[/h3]
 [list]

@@ -28,7 +28,17 @@ ms_status — status in the console
 ms_give_gun — give the STC "Harrier"[/code]
 
 [h3]Loading screen for the host (optional)[/h3]
-Garry's Mod always shows its own loading page to whoever hosts the game, so the portal tunnel is only seen by players who connect to you. To see it yourself, download [url=https://github.com/Prostochell-544/MapSingularity/releases/latest/download/MapSingularity_HostLoadingScreen.zip]MapSingularity_HostLoadingScreen.zip[/url], unpack it and double-click [b]install.bat[/b], then restart the game. It finds the game folder by itself; [b]uninstall.bat[/b] puts everything back. After a GMod update just run install.bat again.
+Garry's Mod always shows its own loading page to whoever hosts the game (singleplayer or the host of a listen server), so the portal tunnel is only seen by players who connect to you. To see it yourself:
+[olist]
+[*]Download [url=https://github.com/Prostochell-544/MapSingularity/releases/latest/download/MapSingularity_HostLoadingScreen.zip]MapSingularity_HostLoadingScreen.zip[/url].
+[*]Unpack it anywhere.
+[*]Double-click [b]install.bat[/b]. The game folder is found automatically; if the game is in Program Files, Windows asks for administrator rights.
+[*]Restart Garry's Mod.
+[/olist]
+The tunnel only appears while jumping through a portal — normal map loads stay the same. [b]uninstall.bat[/b] puts the game file back, [b]status.bat[/b] shows whether it is installed. After a GMod update or "Verify integrity of game files" just run install.bat again.
+
+[h3]Source code[/h3]
+[url=https://github.com/Prostochell-544/MapSingularity]GitHub — Prostochell-544/MapSingularity[/url] (MIT license): the addon, the model build tools and the installer.
 
 [h3]Notes[/h3]
 [list]
