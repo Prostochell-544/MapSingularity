@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ms_prime</title>
+</head>
+<body>
+<script>
+	// MapSingularity: early "portal jump" signal for the host loading-screen patch.
+	// The addon opens this page invisibly (same origin as loading.html) right before
+	// changelevel; ms_tunnel.js reads the stamp as soon as the loading page opens.
+	// "#clear" removes the stamp when a jump is aborted.
+	(function () {
+		var clear = location.hash === '#clear';
+		try {
+			if (clear) {
+				localStorage.removeItem('ms_transit');
+			} else {
+				localStorage.setItem('ms_transit', String(Date.now()));
+			}
+			console.warn('[MapSingularity] prime ' + (clear ? 'cleared' : 'set'));
+		} catch (e) {
+			console.warn('[MapSingularity] prime failed: ' + e);
+		}
+	})();
+</script>
+</body>
+</html>

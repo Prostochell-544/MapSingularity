@@ -1,0 +1,19 @@
+{
+	"title": "MapSingularity: Seamless Workshop Roulette",
+	"description": "Background-fetches a random well-rated Workshop map, precaches its assets from the BSP entity lump and opens a portal. Step in: FOV warp, radial blur, muffled audio, fade to black - and you wake up on the new map with your health, armor, weapons and ammo intact.",
+	"type": "entity",
+	"tags": [
+		"fun",
+		"scenic"
+	],
+	"ignore": [
+		"*.md",
+		"*.psd",
+		"*.bak",
+		".git*",
+		".vscode/*",
+		"docs/*",
+		"web/*",
+		"tools/*"
+	]
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>КПП «Лунь» — превью меша</title>
+<style>
+	html, body { margin: 0; height: 100%; background: #16171b; color: #d8d8dc; font: 13px/1.4 system-ui, sans-serif; overflow: hidden; }
+	#ui { position: fixed; left: 12px; top: 12px; display: flex; gap: 6px; flex-wrap: wrap; z-index: 2; }
+	button { background: #2a2c33; color: #d8d8dc; border: 1px solid #3a3d45; border-radius: 4px; padding: 5px 10px; cursor: pointer; }
+	button.on { background: #4b3c7a; border-color: #6b58a8; }
+	#info { position: fixed; left: 12px; bottom: 12px; opacity: .75; z-index: 2; }
+</style>
+<script type="importmap">
+{ "imports": {
+	"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+	"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="ui">
+	<button data-view="persp">3/4</button>
+	<button data-view="side">Справа</button>
+	<button data-view="left">Слева</button>
+	<button data-view="top">Сверху</button>
+	<button data-view="front">Спереди</button>
+	<button data-view="back">Сзади</button>
+	<button id="wire">Сетка</button>
+</div>
+<div id="info"></div>
+<script src="preview_data.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const D = window.KPP_LUN;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x16171b);
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const key = new THREE.DirectionalLight(0xffffff, 1.4);
+key.position.set(-20, 40, 30);
+scene.add(key);
+
+const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.1, 2000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Source: X вперёд, Y влево, Z вверх -> three: Y вверх.
+const root = new THREE.Group();
+root.rotation.x = -Math.PI / 2;
+scene.add(root);
+
+const mats = {};
+for (const [name, m] of Object.entries(D.materials)) {
+	mats[name] = new THREE.MeshStandardMaterial({
+		color: new THREE.Color(...m.color), metalness: m.metal, roughness: m.rough,
+		emissive: m.emissive ? new THREE.Color(...m.emissive) : new THREE.Color(0, 0, 0),
+		emissiveIntensity: m.emissive ? 1.6 : 0,
+	});
+}
+const edgeMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45 });
+const edgeGroups = [];
+let tris = 0;
+
+for (const p of D.parts) {
+	const g = new THREE.BufferGeometry();
+	g.setAttribute('position', new THREE.Float32BufferAttribute(p.pos, 3));
+	g.setAttribute('normal', new THREE.Float32BufferAttribute(p.nrm, 3));
+	root.add(new THREE.Mesh(g, mats[p.mat]));
+	tris += p.pos.length / 9;
+
+	const eg = new THREE.BufferGeometry();
+	eg.setAttribute('position', new THREE.Float32BufferAttribute(p.edges, 3));
+	const lines = new THREE.LineSegments(eg, edgeMat);
+	lines.visible = false;
+	root.add(lines);
+	edgeGroups.push(lines);
+}
+
+const box = new THREE.Box3().setFromObject(root);
+const center = box.getCenter(new THREE.Vector3());
+const size = box.getSize(new THREE.Vector3()).length();
+controls.target.copy(center);
+document.getElementById('info').textContent =
+	`деталей: ${D.parts.length} · треугольников: ${tris} · ЛКМ — вращать, колесо — зум`;
+
+const VIEWS = {
+	persp: [0.55, 0.32, 0.75],
+	side:  [0, 0, 1],      // справа: -Y Source = +Z three
+	left:  [0, 0, -1],
+	top:   [0, 1, 0.0001],
+	front: [1, 0, 0],
+	back:  [-1, 0, 0],
+};
+function view(name) {
+	const v = new THREE.Vector3(...VIEWS[name]).normalize().multiplyScalar(size * 1.15);
+	camera.position.copy(center).add(v);
+	camera.up.set(0, 1, 0);
+	controls.update();
+	document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === name));
+}
+document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => view(b.dataset.view));
+document.getElementById('wire').onclick = (e) => {
+	const on = !edgeGroups[0].visible;
+	edgeGroups.forEach(l => l.visible = on);
+	e.target.classList.toggle('on', on);
+};
+window.KPP_VIEW = view;
+view(new URLSearchParams(location.search).get('view') || 'persp');
+if (new URLSearchParams(location.search).get('wire')) document.getElementById('wire').click();
+
+addEventListener('resize', () => {
+	camera.aspect = innerWidth / innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(innerWidth, innerHeight);
+});
+(function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>

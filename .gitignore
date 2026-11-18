@@ -1,0 +1,19 @@
+# Сгенерированные исходники модели (пересобираются: python tools/model/build_lun.py)
+art/kpp_lun/*
+!art/kpp_lun/render_*.png
+!art/kpp_lun/preview_viewmodel.png
+# Модель из Tripo (производная от сгенерированного пользователем GLB) — не публикуется
+art/kpp_lun_tripo/
+# Текстуры Valve, вынутые из VPK для разбора, — чужой контент
+art/ref_valve_textures.png
+
+# Сборки релиза — прикладываются к GitHub Releases, а не коммитятся
+release/*.gma
+release/*.zip
+release/MapSingularity_HostLoadingScreen/
+release/gun_side.png
+
+# Локальное
+.claude/
+__pycache__/
+*.pyc

@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/map_singularity/kpp_lun/kpp_screen"
+	"$bumpmap" "models/map_singularity/kpp_lun/kpp_flat_normal"
+	"$phong" "1"
+	"$phongexponent" "80"
+	"$phongboost" "3"
+	"$phongfresnelranges" "[0.6 0.9 1]"
+	"$selfillum" "1"
+}

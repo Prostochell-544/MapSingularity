@@ -1,0 +1,38 @@
+[h1]MapSingularity: Seamless Workshop Roulette[/h1]
+
+While you play, the addon quietly picks a random Workshop map, downloads and mounts it, warms up its models and materials, and opens a portal. Step in — the view stretches, sound fades, the world goes dark — and you wake up on the new map with your health, armor, weapons and ammo intact.
+
+[h3]How to play[/h3]
+[list]
+[*]Take the [b]STC "Harrier"[/b] (Spatial Transition Complex) from the spawn menu (MapSingularity) or the settings panel.
+[*][b]LMB[/b] — open a portal where you aim. [b]RMB[/b] — roll another map. [b]R[/b] — collapse the portal.
+[*]The green terminal on the device shows what is happening: searching, downloading, warming up, ready.
+[*]When the portal is stable, walk into it.
+[/list]
+
+[h3]Settings[/h3]
+Q menu → Utilities → MapSingularity → Settings:
+[list]
+[*]Language: English, Ukrainian, Russian or the game language.
+[*]Where to look for maps: [b]Best maps[/b] (popular, well rated) or [b]Whole Workshop[/b] (anything).
+[*]Rating filter, max map size, auto search, portal pull, 18+ maps.
+[*]Portal look (per player): Classic violet rings, Fun rainbow tunnel, Minimal black hole.
+[*]Important messages in chat, debug info, gun position.
+[/list]
+Server settings can be changed by the host and superadmins.
+
+[h3]Console[/h3]
+[code]ms_force_fetch [workshop id or link] — spin the roulette now (or load a specific map)
+ms_abort — stop and remove the portal
+ms_status — status in the console
+ms_give_gun — give the STC "Harrier"[/code]
+
+[h3]Loading screen for the host (optional)[/h3]
+Garry's Mod always shows its own loading page to whoever hosts the game, so the portal tunnel is only seen by players who connect to you. To see it yourself, download [url=https://github.com/Prostochell-544/MapSingularity/releases/latest/download/MapSingularity_HostLoadingScreen.zip]MapSingularity_HostLoadingScreen.zip[/url], unpack it and double-click [b]install.bat[/b], then restart the game. It finds the game folder by itself; [b]uninstall.bat[/b] puts everything back. After a GMod update just run install.bat again.
+
+[h3]Notes[/h3]
+[list]
+[*]Pure Lua, no binary modules. Works in singleplayer, on listen servers and dedicated servers.
+[*]The custom black loading screen is only visible to players who connect to your server — the game always shows its own loading page to the host (see the optional installer above).
+[*]Maps from the Workshop are random: some may be broken or need content you don't have.
+[/list]

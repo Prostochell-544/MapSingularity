@@ -1,0 +1,11 @@
+* text=auto
+*.mdl binary
+*.vvd binary
+*.vtx binary
+*.phy binary
+*.vtf binary
+*.png binary
+*.jpg binary
+*.tga binary
+*.ps1 text eol=crlf
+*.bat text eol=crlf

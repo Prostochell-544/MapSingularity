@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>MapSingularity</title>
+<style>
+	html, body { margin: 0; width: 100%; height: 100%; background: #000; overflow: hidden; cursor: none; }
+</style>
+</head>
+<body>
+<script src="ms_tunnel.js"></script>
+<script>
+	// Экран загрузки для подключающихся игроков (sv_loadingurl). Рядом на хостинге
+	// должен лежать ms_tunnel.js. GMod вызывает эти функции — экран ничего не пишет.
+	function GameDetails() {}
+	function SetStatusChanged() {}
+	function SetFilesNeeded() {}
+	function SetFilesTotal() {}
+	function DownloadingFile() {}
+
+	if (window.MSTunnel) MSTunnel.start({ fadeIn: 0.8 });
+</script>
+</body>
+</html>

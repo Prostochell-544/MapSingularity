@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/map_singularity/kpp_lun/kpp_tube"
+	"$selfillum" "1"
+	"$selfillumtint" "[1.5 1.4 1.3]"
+}
